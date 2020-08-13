@@ -28,6 +28,10 @@ RUN wget -O Miniconda.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-
 RUN apt-get install -y cmake git vim libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libeigen3-dev libgflags-dev libgoogle-glog-dev libhdf5-dev \
 	&& pip install notebook
 
+ENV PYTHONPATH=/usr/local/lib/python3.7/
+
+ENV PYTHONHOME=/usr/local
+
 RUN git clone https://github.com/opencv/opencv_contrib.git \
 	&& cd opencv_contrib \
 	&& git checkout $opencv_version \
@@ -41,12 +45,8 @@ RUN git clone https://github.com/opencv/opencv_contrib.git \
 	-D CMAKE_BUILD_TYPE=Release \
 	-D CMAKE_INSTALL_PREFIX=/usr/local \
 	-D BUILD_EXAMPLES=ON \
-	-D PYTHON3_EXECUTABLE=/usr/local/bin/python \
-	-D OPENCV_PYTHON3_INSTALL_PATH=/usr/local/lib/python"$pythonVersion"/site-packages \
-	-D PYTHON_INCLUDE_DIR=/usr/local/include/python"$pythonVersion"m/ \
-	-D PYTHON_LIBRARY=/usr/local/lib/libpython"$pythonVersion"m.so \
-	-D PYTHON3_NUMPY_INCLUDE_DIRS=/usr/local/lib/python"$pythonVersion"/site-packages/numpy/core/include/ \
 	-D OPENCV_GENERATE_PKGCONFIG=ON \
+	-D PYTHON3_NUMPY_INCLUDE_DIRS=/usr/local/lib/python"$pythonVersion"/site-packages/numpy/core/include/ \
 	-D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
 	.. \
 	&& make install/strip \
@@ -57,7 +57,9 @@ RUN cd /usr/local/lib \
 	&& wget -O script.sh https://raw.githubusercontent.com/bigvisionai/docker-opencv/master/script.sh \
 	&& chmod u+x script.sh \
 	&& ./script.sh $opencv_version $pythonVersion \
-	&& rm -f script.sh
+	&& rm -f script.sh \
+	&& wget https://raw.githubusercontent.com/bigvisionai/docker-opencv/master/displayImages.h \
+	&& wget https://raw.githubusercontent.com/bigvisionai/docker-opencv/master/matplotlibcpp.h
 
 RUN apt-get -qq -y autoremove \
 	&& apt-get -qq autoclean
