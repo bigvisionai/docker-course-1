@@ -25,7 +25,8 @@ RUN wget -O Miniconda.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-
 	&& conda install -y numpy -c conda-forge \
 	&& conda clean --all --yes
 
-RUN apt-get install -y cmake git vim libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libeigen3-dev libgflags-dev libgoogle-glog-dev libhdf5-dev \
+RUN apt-get update && apt-get upgrade -y \
+	&& apt-get install -y cmake git vim libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libeigen3-dev libgflags-dev libgoogle-glog-dev libhdf5-dev \
 	&& pip install notebook \
 	&& apt-get clean autoclean \
 	&& apt-get autoremove -y \
@@ -58,11 +59,8 @@ RUN git clone https://github.com/opencv/opencv_contrib.git \
 	&& cd /home \
 	&& rm -rf opencv opencv_contrib
 
-ADD script.sh displayImages.h matplotlibcpp.h /usr/local/lib/
-
-RUN mkdir /home/sampleCode
-
-ADD sampleCode to /home/sampleCode
+COPY script.sh displayImages.h matplotlibcpp.h /usr/local/lib/ \
+	&& sampleCode to /home/sampleCode
 
 RUN cd /usr/local/lib \
 	&& chmod u+x script.sh \
