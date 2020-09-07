@@ -59,8 +59,8 @@ RUN git clone https://github.com/opencv/opencv_contrib.git \
 	&& cd /home \
 	&& rm -rf opencv opencv_contrib
 
-COPY script.sh displayImages.h matplotlibcpp.h /usr/local/lib/ \
-	&& sampleCode to /home/sampleCode
+COPY script.sh displayImages.h matplotlibcpp.h /usr/local/lib/
+COPY sampleCode /home/sampleCode
 
 RUN cd /usr/local/lib \
 	&& chmod u+x script.sh \
