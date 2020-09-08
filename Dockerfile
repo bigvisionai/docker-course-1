@@ -10,9 +10,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get upgrade -y \
 	&& apt-get install -y --no-install-recommends apt-utils \
 	&& apt-get install -y wget \
-	&& apt-get clean autoclean \
-	&& apt-get autoremove -y \
-	&& rm -rf /var/lib/apt/lists/*
+	&& apt-get -qq autoclean
 
 RUN wget -O Miniconda.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh" \
 	&& chmod u+x Miniconda.sh \
@@ -25,12 +23,9 @@ RUN wget -O Miniconda.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-
 	&& conda install -y numpy -c conda-forge \
 	&& conda clean --all --yes
 
-RUN apt-get update && apt-get upgrade -y \
-	&& apt-get install -y cmake git vim libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libeigen3-dev libgflags-dev libgoogle-glog-dev libhdf5-dev \
+RUN apt-get install -y cmake git vim libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libeigen3-dev libgflags-dev libgoogle-glog-dev libhdf5-dev \
 	&& pip install notebook \
-	&& apt-get clean autoclean \
-	&& apt-get autoremove -y \
-	&& rm -rf /var/lib/apt/lists/*
+	&& apt-get -qq autoclean
 
 ENV PYTHONPATH=/usr/local/lib/python3.7/
 ENV PYTHONHOME=/usr/local
