@@ -1,9 +1,9 @@
-# docker-opencv
-This image consists of CPP and Python3 installation of OpenCV-4.4.0. You can use it to run CPP and Python3 code on the terminal, or create CPP and Python3 notebooks.
+# Course-1 Docker Image
+This image consists of CPP and Python3 installation of OpenCV-4.4.0. You can use this image to run CPP and Python3 code on the terminal, or create CPP and Python3 notebooks.
 
 # How to run
 ### Our favourite run command is:
-#### `docker run -it --rm --mount type=bind,source="$(pwd)"/work,target=/work -p 8888:8888 opencvcourses/opencv:440`
+#### `docker run -it --rm --mount type=bind,source="$(pwd)"/work,target=/work -p 8888:8888 opencvcourses/course-1:latest`
 
 `-it` starts an interactive shell. This switch is always needed to start the container. Otherwise, it will start and stop instantly.
 <br>
@@ -18,8 +18,8 @@ This image consists of CPP and Python3 installation of OpenCV-4.4.0. You can use
 In this configuration, you can use all the functions of our image
 
 ### Minimal run command:
-`docker run -it opencvcourses/opencv:440`
-<br>
+#### `docker run -it opencvcourses/course-1:latest`
+
 This will start the container with an interactive shell. This is the most basic command to run the image.
 <br>
 Here, you can run python, or c++ code (using cmake), or even cling. 
@@ -31,10 +31,16 @@ To start cling, enter `cling` on the terminal and code in c++ like python.
 To use Jupyter Notebook as well, you'll need to expose a port from the container to the host. You can expose ports using the `-p` switch.
 
 # How to use:
-### cmake
-You can run CPP codes using cmake. Try the sample code available in our course.
-### Jupyter Notebook:
-Start the container and execute the below command to start a Jupyter Notebook session:
+The image contains sample code in `/home/sampleCode`. You can go through it to understand differnt ways to use the image.
+### Terminal:
+#### CPP
+You can run CPP code on the terminal using cmake.<br>
+You can also start a `cling` session on the terminal. Cling is an interactive CPP interpreter. You can code CPP on it just like you code on Python.
+#### Python
+You can create `.py` scripts and run them on the terminal.<br>
+Moreover, you can also run python code directly on the terminal using the `python` command.
+### Notebooks:
+Run the container and execute the following command to start a Jupyter Notebook session:
 <br>
 `jupyter notebook --ip 0.0.0.0 --allow-root --no-browser`
 <br>
@@ -46,4 +52,4 @@ Xeus-cling is the CPP interpreter kernel. Coding is similar in xeus-cling, but y
 #include "/usr/local/lib/displayImages.h"
 #include "/usr/local/lib/matplotlibcpp.h"
 ```
-Check the course contents on how to print in cpp using matplotlib-cpp
+Check the course contents or the sample code on how to print in cpp using matplotlib-cpp.
