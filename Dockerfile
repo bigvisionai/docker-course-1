@@ -18,7 +18,7 @@ RUN wget --no-verbose -O Miniconda.sh "https://repo.anaconda.com/miniconda/Minic
 	&& rm -f Miniconda.sh \
 	&& conda install -y python=$pythonVersion \
 	&& conda update conda -y \
-	&& conda install -y xeus-cling -c conda-forge \
+	&& conda install -y xeus-cling=0.9.0 -c conda-forge \
 	&& conda install -y matplotlib -c conda-forge \
 	&& conda install -y numpy -c conda-forge \
 	&& conda clean --all --yes
