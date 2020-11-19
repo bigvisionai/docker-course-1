@@ -2,7 +2,7 @@ FROM debian:buster-slim
 
 MAINTAINER Labhesh Valechha <labheshvalechha@gmail.com>
 
-ARG opencv_version=4.5.0
+ARG opencv_version=4.1.0
 ARG pythonVersion=3.7
 ENV DEBIAN_FRONTEND noninteractive
 
